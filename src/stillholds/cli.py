@@ -158,8 +158,8 @@ def cmd_approve(args) -> int:
             ),
         )
         bl.save_baseline(baseline, root=cfg.root)
-        dirty_note = "  ⚠ (with uncommitted changes)" if dirty else ""
-        print(f"✓ baseline approved — {name}: {report.fmt_effect(effect)}{dirty_note}")
+        dirty_note = "   (with uncommitted changes)" if dirty else ""
+        print(f" baseline approved — {name}: {report.fmt_effect(effect)}{dirty_note}")
     return EXIT_OK
 
 
@@ -193,7 +193,7 @@ def cmd_check(args) -> int:
             chunks.append(report.render_holds(name, baseline.effect, current, ev))
 
         if not markdown:
-            icon = {"HOLDS": "✓", "IMPROVED": "↑", "REGRESSED": "✗"}[ev.verdict.value]
+            icon = {"HOLDS": "", "IMPROVED": "", "REGRESSED": ""}[ev.verdict.value]
             print(f"{icon} {name}: {ev.verdict.value} — {ev.reason}")
 
     if markdown and chunks:
@@ -279,10 +279,10 @@ def cmd_list(args) -> int:
         print("no claims discovered.")
         return EXIT_OK
 
-    icons = {"HOLDS": "✓", "IMPROVED": "↑", "REGRESSED": "✗"}
+    icons = {"HOLDS": "", "IMPROVED": "", "REGRESSED": ""}
     for name, claim_obj in registry.items():
         if not bl.baseline_exists(name, root=cfg.root):
-            print(f"  ○ {name}: no baseline (run `stillholds approve {name}`)")
+            print(f"   {name}: no baseline (run `stillholds approve {name}`)")
             continue
         baseline = bl.load_baseline(name, root=cfg.root)
         current = _run_claim_or_exit(claim_obj, data)

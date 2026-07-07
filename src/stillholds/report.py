@@ -45,9 +45,9 @@ def _table(baseline: Effect, current: Effect) -> str:
 
 def render_holds(claim: str, baseline: Effect, current: Effect, ev: Evaluation) -> str:
     if ev.verdict == Verdict.IMPROVED:
-        icon, head, note = "📈", "improved", "The claim is now *stronger* than the approved baseline."
+        icon, head, note = "", "improved", "The claim is now *stronger* than the approved baseline."
     else:
-        icon, head, note = "✅", "still holds", "Inputs changed, but the claim stays within the accepted band."
+        icon, head, note = "", "still holds", "Inputs changed, but the claim stays within the accepted band."
     return (
         f"### {icon} `{claim}` — {head}\n\n"
         f"> {note}\n\n"
@@ -59,7 +59,7 @@ def render_holds(claim: str, baseline: Effect, current: Effect, ev: Evaluation) 
 def render_regressed(claim: str, baseline: Effect, current: Effect,
                      ev: Evaluation, attribution=None) -> str:
     body = (
-        f"### ❌ `{claim}` — insight regression detected\n\n"
+        f"###  `{claim}` — insight regression detected\n\n"
         f"{_table(baseline, current)}\n"
         f"**Why:** {ev.reason}\n\n"
     )
@@ -71,23 +71,23 @@ def render_regressed(claim: str, baseline: Effect, current: Effect,
 def _render_attribution_md(attr) -> str:
     from .attribution import Cause
     labels = {
-        Cause.CODE: "⚠ The **analysis file** changed — data unchanged (re-ran the snapshotted analysis file on the new data; it reproduced the baseline).",
-        Cause.DATA: "⚠ The **data** changed — analysis file unchanged (re-ran the current analysis file on the old data; it reproduced the baseline).",
-        Cause.BOTH_INDEPENDENT: "⚠ Both data **and** the analysis file changed; each one alone reproduces the regression.",
-        Cause.INTERACTION: "⚠ Neither data nor the analysis file alone reproduces it — the cause is their **interaction**.",
-        Cause.INCONCLUSIVE: "❔ Could not isolate the cause — a counterfactual re-run failed.",
+        Cause.CODE: " The **analysis file** changed — data unchanged (re-ran the snapshotted analysis file on the new data; it reproduced the baseline).",
+        Cause.DATA: " The **data** changed — analysis file unchanged (re-ran the current analysis file on the old data; it reproduced the baseline).",
+        Cause.BOTH_INDEPENDENT: " Both data **and** the analysis file changed; each one alone reproduces the regression.",
+        Cause.INTERACTION: " Neither data nor the analysis file alone reproduces it — the cause is their **interaction**.",
+        Cause.INCONCLUSIVE: " Could not isolate the cause — a counterfactual re-run failed.",
     }
     out = ["**Attributed cause (by counterfactual re-run of the analysis file):**\n", labels.get(attr.cause, str(attr.cause))]
     if attr.detail:
         out.append(f"\n_{attr.detail}_")
     if attr.env_warning:
         out.append(
-            "\n\n> ⚠ **Note:** key packages changed since the baseline, so this "
+            "\n\n>  **Note:** key packages changed since the baseline, so this "
             "attribution may be affected by the environment, not only data/code."
         )
     # Honest scope note: the snapshot is the analysis FILE only, not its imports.
     out.append(
-        "\n\n> ℹ Attribution snapshots the analysis file only. If your analysis "
+        "\n\n>  Attribution snapshots the analysis file only. If your analysis "
         "imports project code from other files, changes there are not isolated "
         "and may be mis-attributed."
     )
