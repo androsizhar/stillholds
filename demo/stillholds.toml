@@ -1,0 +1,11 @@
+# Which module to import to discover claims (like pytest discovers tests).
+analysis_module = "analysis"
+
+# Where the input data the claim consumes lives.
+[data]
+events = "events.csv"
+
+[tolerances]
+max_shrink = 0.50          # regress if the effect loses >50% of its magnitude
+max_width_ratio = 2.0      # regress if the CI widens >2x
+improve_margin = 0.20      # IMPROVED if it grows >20% without losing precision
