@@ -187,7 +187,7 @@ pip install -e ".[dev]"
 pytest                     # 54 tests: pure layer, persistence, counterfactual, CLI e2e
 ```
 
-## Limitations (v0.1, honest)
+## Limitations
 
 StillHolds is designed for **deterministic analyses on file-scoped code**. Inside
 that envelope it's reliable; outside it, the failure modes below are real, so
