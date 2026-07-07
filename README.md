@@ -1,5 +1,9 @@
 # StillHolds
 
+[![PyPI version](https://img.shields.io/pypi/v/stillholds.svg)](https://pypi.org/project/stillholds/)
+[![Python](https://img.shields.io/pypi/pyversions/stillholds.svg)](https://pypi.org/project/stillholds/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
 **CI for analytical claims.** Does your conclusion *still hold* after the data,
 the code, or the config changed?
 
@@ -85,8 +89,8 @@ When it regresses (someone changed the cohort filter, data identical):
 ## Install
 
 ```bash
-pip install -e .          # from a clone
-# pip install stillholds  # once published to PyPI
+pip install stillholds
+# or, from a clone: pip install -e .
 ```
 
 Requires Python ≥ 3.10 and pandas. `scipy` is only needed by the demo analysis,
