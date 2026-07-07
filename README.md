@@ -62,7 +62,7 @@ An `assert lift > 0.10` tells you a number crossed a threshold. That's brittle
 
 When the conclusion holds (more data arrived, the effect is stable):
 
-> ### ✅ `ab_test_signup_lift` — still holds
+> ###  `ab_test_signup_lift` — still holds
 > Inputs changed, but the claim stays within the accepted band.
 >
 > | | Baseline | Current |
@@ -71,7 +71,7 @@ When the conclusion holds (more data arrived, the effect is stable):
 
 When it regresses (someone changed the cohort filter, data identical):
 
-> ### ❌ `ab_test_signup_lift` — insight regression detected
+> ###  `ab_test_signup_lift` — insight regression detected
 >
 > | | Baseline | Current |
 > |---|---|---|
@@ -80,7 +80,7 @@ When it regresses (someone changed the cohort filter, data identical):
 > **Why:** magnitude dropped 60% vs. the baseline
 >
 > **Attributed cause (by counterfactual re-run):**
-> ⚠ Analysis **code** changed — data unchanged (verified by re-running the old code on the new data).
+>  Analysis **code** changed — data unchanged (verified by re-running the old code on the new data).
 
 ## Install
 

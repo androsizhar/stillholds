@@ -23,7 +23,7 @@ class TestFormat:
 class TestHolds:
     def test_holds_mentions_claim_and_holds(self):
         out = render_holds("ab", BASE, CUR_HOLD, Evaluation(Verdict.HOLDS, "dentro de la banda"))
-        assert "ab" in out and "still holds" in out.lower() and "❌" not in out
+        assert "ab" in out and "still holds" in out.lower()
 
     def test_improved_reads_as_improvement(self):
         strong = Effect(0.09, (0.07, 0.11), 6000, direction="increase", unit="absolute", label="pp")
