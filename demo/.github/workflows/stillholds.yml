@@ -1,0 +1,49 @@
+name: StillHolds
+
+on:
+  pull_request:
+
+jobs:
+  check-claims:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0        # el baseline aprobado vive en el repo
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install
+        run: pip install stillholds
+
+      - name: Check claims
+        id: check
+        run: |
+          # check returns exit 1 on regression; capture without aborting yet
+          if stillholds check --format markdown > report.md; then
+            echo "regressed=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "regressed=true" >> "$GITHUB_OUTPUT"
+            # counterfactual (expensive): only once we know it regressed
+            echo "" >> report.md
+            stillholds explain ab_test_signup_lift --format markdown >> report.md || true
+          fi
+
+      - name: Comment on PR
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const body = fs.readFileSync('report.md', 'utf8');
+            await github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body,
+            });
+
+      - name: Fail if regressed
+        if: steps.check.outputs.regressed == 'true'
+        run: exit 1

@@ -1,0 +1,48 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "stillholds"
+version = "0.1.0"
+description = "CI for analytical claims — does your conclusion still hold?"
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+keywords = ["ci", "data-science", "reproducibility", "provenance",
+            "regression-testing", "analytics", "ab-testing"]
+authors = [{ name = "StillHolds contributors" }]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Science/Research",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Scientific/Engineering",
+    "Topic :: Software Development :: Testing",
+]
+dependencies = [
+    "pandas>=2.0",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=7.0"]
+parquet = ["pyarrow>=14.0"]   # optional: more compact snapshots when available
+
+[project.urls]
+Homepage = "https://github.com/androsizhar/stillholds"
+Repository = "https://github.com/androsizhar/stillholds"
+Issues = "https://github.com/androsizhar/stillholds/issues"
+
+[project.scripts]
+stillholds = "stillholds.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]

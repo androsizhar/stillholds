@@ -1,0 +1,10 @@
+__pycache__/
+*.pyc
+*.egg-info/
+build/
+dist/
+.pytest_cache/
+run_tests_offline.py
+# Los snapshots de datos pueden ser pesados; el baseline JSON y el snapshot de
+# código SÍ se versionan (son el contrato aprobado). Ajusta según tu caso.
+.stillholds/data/
