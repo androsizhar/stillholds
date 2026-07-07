@@ -4,19 +4,18 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "stillholds"
-version = "0.1.0"
+version = "0.1.1"
 description = "CI for analytical claims — does your conclusion still hold?"
 readme = "README.md"
 requires-python = ">=3.10"
-license = { text = "MIT" }
+license = "MIT"
 keywords = ["ci", "data-science", "reproducibility", "provenance",
             "regression-testing", "analytics", "ab-testing"]
-authors = [{ name = "StillHolds contributors" }]
+authors = [{ name = "Andros Izhar" }]
 classifiers = [
     "Development Status :: 4 - Beta",
     "Intended Audience :: Science/Research",
     "Intended Audience :: Developers",
-    "License :: OSI Approved :: MIT License",
     "Programming Language :: Python :: 3",
     "Programming Language :: Python :: 3.10",
     "Programming Language :: Python :: 3.11",

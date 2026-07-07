@@ -14,7 +14,7 @@ from .claim import claim
 from .effect import Effect
 from .evaluate import Evaluation, Tolerances, Verdict, evaluate
 
-__version__ = "0.1.0"
+__version__ = "0.1.1"
 
 __all__ = [
     "claim", "Effect", "evaluate", "Evaluation", "Verdict", "Tolerances",
